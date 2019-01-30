@@ -119,6 +119,23 @@ class Meta
     }
 
     /**
+     * Eliminar el registro con el identificador especificado
+     *
+     * @param $idMeta identificador de la meta
+     * @return bool Respuesta de la eliminación
+     */
+    public static function Actualizar_Campo($tabla, $campo, $valor, $id, $id_valida)
+    {
+        // Sentencia DELETE
+        $comando = "UPDATE ".$tabla." SET ".$campo."=? WHERE ".$id."= ?";
+
+        // Preparar la sentencia
+        $sentencia = Database::getInstance()->getDb()->prepare($comando);
+
+        return $sentencia->execute(array($valor, $id_valida));
+    }
+
+    /**
      * Insertar una nueva meta
      *
      * @param $id_test      identificador
@@ -155,6 +172,26 @@ class Meta
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
 
         return $sentencia->execute(array($id_pedido, $id_item, $cantidad));
+
+    }
+
+    /**
+     * Insertar una nueva meta
+     *
+     * @param $id_test      identificador
+     * @param $nombre       nuevo titulo
+     * @param $edad         nueva descripcion 
+     * @return PDOStatement
+     */
+    public static function Nuevo_Producto($nombre, $valor, $stock, $imagen, $estado)
+    {
+        // Sentencia INSERT
+        $comando = "INSERT INTO productos (nombre, valor, stock, imagen, estado) VALUES (?,?,?,?,?)";
+
+        // Preparar la sentencia
+        $sentencia = Database::getInstance()->getDb()->prepare($comando);
+
+        return $sentencia->execute(array($nombre, $valor, $stock, $imagen, $estado));
 
     }
 }

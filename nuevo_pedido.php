@@ -11,7 +11,12 @@ try{
     $info = $_REQUEST;
     $detalle = $_REQUEST['detalle'];
 
-    $np = Meta::Nuevo_Pedido($info['nombre'], $info['direccion'], $info['retira_local'], $info['forma_pago'], $fecha, $hora, 0);
+    $nombre_cliente = "Recoger en el Local";
+    if ($info['nombre']!=''){
+        $nombre_cliente = $info['nombre'];
+    }
+
+    $np = Meta::Nuevo_Pedido($nombre_cliente, $info['direccion'], $info['retira_local'], $info['forma_pago'], $fecha, $hora, 0);
     $idnp = Meta::Consulta_Unico("SELECT id_pedido FROM pedidos ORDER BY id_pedido DESC LIMIT 1");
 
     if (count($detalle)>0){
