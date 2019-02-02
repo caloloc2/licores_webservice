@@ -1,2 +1,3 @@
 # licores_webservice
-Web Service para la aplicaicon Licores
+WebService para la aplicacion de Licores.
+Contiene Proyecto en Android Studio y su apk.
