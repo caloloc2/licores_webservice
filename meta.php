@@ -194,6 +194,26 @@ class Meta
         return $sentencia->execute(array($nombre, $valor, $stock, $imagen, $estado));
 
     }
+
+    /**
+     * Insertar una nueva meta
+     *
+     * @param $id_test      identificador
+     * @param $nombre       nuevo titulo
+     * @param $edad         nueva descripcion 
+     * @return PDOStatement
+     */
+    public static function Nuevo_Usuario($nombres, $direccion, $tipo_usuario, $usuario, $clave)
+    {
+        // Sentencia INSERT
+        $comando = "INSERT INTO usuarios (nombres, direccion, tipo_usuario, usuario, clave) VALUES (?,?,?,?,?)";
+
+        // Preparar la sentencia
+        $sentencia = Database::getInstance()->getDb()->prepare($comando);
+
+        return $sentencia->execute(array($nombres, $direccion, $tipo_usuario, $usuario, $clave));
+
+    }
 }
 
 ?>
