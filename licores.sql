@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : NIBEMI
-Source Server Version : 50559
-Source Host           : 34.223.215.43:3306
+Source Server         : LOCAL
+Source Server Version : 50505
+Source Host           : localhost:3306
 Source Database       : licores
 
 Target Server Type    : MYSQL
-Target Server Version : 50559
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-01-29 15:22:08
+Date: 2019-02-05 23:39:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,7 @@ CREATE TABLE `pedidos` (
   `hora` time NOT NULL,
   `estado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id_pedido`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of pedidos
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for pedidos_detalle
@@ -45,11 +41,7 @@ CREATE TABLE `pedidos_detalle` (
   `id_item` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id_pedido_detalle`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of pedidos_detalle
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for productos
@@ -63,10 +55,18 @@ CREATE TABLE `productos` (
   `imagen` varchar(255) NOT NULL DEFAULT '',
   `estado` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of productos
+-- Table structure for usuarios
 -- ----------------------------
-INSERT INTO `productos` VALUES ('1', 'Ron Abuelo Anejo', '12.5', '5', 'http://www.cataloencasa.com/706-thickbox_default/ron-abuelo-anejo-5-anos.jpg', '0');
-INSERT INTO `productos` VALUES ('2', 'Ron 100 Fuegos', '24.1', '10', 'https://www.infocorporativo.tia.com.ec/sites/almacenestia.com/files/productos/images/241922000.jpg', '0');
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `tipo_usuario` tinyint(1) DEFAULT '0' COMMENT '0: usuario / 1:admin',
+  `usuario` varchar(50) DEFAULT '',
+  `clave` varchar(50) DEFAULT '',
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
