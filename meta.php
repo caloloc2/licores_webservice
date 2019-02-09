@@ -143,15 +143,15 @@ class Meta
      * @param $edad         nueva descripcion 
      * @return PDOStatement
      */
-    public static function Nuevo_Pedido($nombre, $direccion, $retira_local, $forma_pago, $fecha, $hora, $estado)
+    public static function Nuevo_Pedido($id_usuario, $nombre, $direccion, $retira_local, $forma_pago, $fecha, $hora, $estado)
     {
         // Sentencia INSERT
-        $comando = "INSERT INTO pedidos (nombre, direccion, retira_local, forma_pago, fecha, hora, estado) VALUES (?,?,?,?,?,?,?)";
+        $comando = "INSERT INTO pedidos (id_usuario, nombre, direccion, retira_local, forma_pago, fecha, hora, estado) VALUES (?,?,?,?,?,?,?,?)";
 
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
 
-        return $sentencia->execute(array($nombre, $direccion, $retira_local, $forma_pago, $fecha, $hora, $estado));
+        return $sentencia->execute(array($id_usuario, $nombre, $direccion, $retira_local, $forma_pago, $fecha, $hora, $estado));
 
     }
 

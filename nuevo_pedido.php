@@ -11,29 +11,31 @@ try{
     $info = $_REQUEST;
     $detalle = $_REQUEST['detalle'];
 
-    $nombre_cliente = "Recoger en el Local";
-    if ($info['nombre']!=''){
-        $nombre_cliente = $info['nombre'];
-    }
-
-    $np = Meta::Nuevo_Pedido($nombre_cliente, $info['direccion'], $info['retira_local'], $info['forma_pago'], $fecha, $hora, 0);
-    $idnp = Meta::Consulta_Unico("SELECT id_pedido FROM pedidos ORDER BY id_pedido DESC LIMIT 1");
-
-    if (count($detalle)>0){
-        if ($idnp['id_pedido']!=''){
-            $descompone = explode("**", $detalle);
-            foreach ($descompone as $linea) {
-                if ($linea!=''){
-                    $valores = explode("//", $linea);
-                    $id_pedido = $idnp['id_pedido'];
-                    $id_item = $valores[0];
-                    $cantidad = $valores[1];
-                    
-                    $npd = Meta::Nuevo_Pedido_Detalle($id_pedido, $id_item, $cantidad);
-                }                
+    if ((isset($info['id_usuario']))&&(!empty($info['id_usuario']))){
+        $nombre_cliente = "Recoger en el Local";
+        if ($info['nombre']!=''){
+            $nombre_cliente = $info['nombre'];
+        }
+    
+        $np = Meta::Nuevo_Pedido($info['id_usuario'], $nombre_cliente, $info['direccion'], $info['retira_local'], $info['forma_pago'], $fecha, $hora, 0);
+        $idnp = Meta::Consulta_Unico("SELECT id_pedido FROM pedidos ORDER BY id_pedido DESC LIMIT 1");
+    
+        if (count($detalle)>0){
+            if ($idnp['id_pedido']!=''){
+                $descompone = explode("**", $detalle);
+                foreach ($descompone as $linea) {
+                    if ($linea!=''){
+                        $valores = explode("//", $linea);
+                        $id_pedido = $idnp['id_pedido'];
+                        $id_item = $valores[0];
+                        $cantidad = $valores[1];
+                        
+                        $npd = Meta::Nuevo_Pedido_Detalle($id_pedido, $id_item, $cantidad);
+                    }                
+                }
+    
+                
             }
-
-            
         }
     }
     
